@@ -33,5 +33,46 @@ namespace NetworkInterfaceGUI
         {
 
         }
+
+        private void textBlock_Initialized(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Window handler, bubbling up");
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Window handler, tunneling down");
+        }
+
+        private void rotatedButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("rotatedButton handler, bubbling up");
+        }
+
+        private void rotatedButton_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("rotatedButton handler, tunneling down");
+        }
+
+        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Grid handler, bubbling up");
+        }
+
+        private void Grid_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("Grid handler, tunneling down");
+            //e.Handled = true;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

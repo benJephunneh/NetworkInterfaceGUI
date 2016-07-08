@@ -5,17 +5,121 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NetworkInterfaceGUI"
         mc:Ignorable="d"
-        Title="Change network settings" Height="350" Width="525">
-    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-        <GroupBox x:Name="groupBox" Header="Current settings" HorizontalAlignment="Left" Height="115" Margin="280,10,0,0" VerticalAlignment="Top" Width="216" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="388,40,0,0" Text="TextBlock" VerticalAlignment="Top" Width="100" FontFamily="Consolas" Cursor="IBeam" Background="White" FontWeight="SemiBold"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="388,70,0,0" Text="TextBlock" VerticalAlignment="Top" Width="100" FontFamily="Consolas" Cursor="IBeam" Background="White" FontWeight="SemiBold"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="388,100,0,0" Text="TextBlock" VerticalAlignment="Top" Width="100" FontFamily="Consolas" Cursor="IBeam" Background="White" FontWeight="SemiBold"/>
-        <Label x:Name="label" Content="IP Address:" HorizontalAlignment="Left" Margin="280,33,0,0" VerticalAlignment="Top" Width="103" Cursor="None" HorizontalContentAlignment="Right"/>
-        <Label x:Name="label1" Content="Subnet mask:" HorizontalAlignment="Left" Margin="280,63,0,0" VerticalAlignment="Top" Width="103" Cursor="None" HorizontalContentAlignment="Right"/>
-        <Label x:Name="label2" Content="Gateway address:" HorizontalAlignment="Left" Margin="280,93,0,0" VerticalAlignment="Top" Width="103" Cursor="None" HorizontalContentAlignment="Right"/>
-        <Button x:Name="button" Content="Copy to clipboard" HorizontalAlignment="Left" Margin="380,130,0,0" VerticalAlignment="Top" Width="108" Click="button_Click"/>
-
+        Title="Change network settings" 
+        Height="350" 
+        Width="525"
+        KeyDown="Window_KeyDown"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Grid KeyDown="Grid_KeyDown" 
+          PreviewKeyDown="Grid_PreviewKeyDown">
+        <GroupBox x:Name="groupBox" 
+                  Header="Current settings" 
+                  HorizontalAlignment="Left" 
+                  Height="150" 
+                  Margin="280,10,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="216" 
+                  Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <!--<TextBox x:Name="textBox" 
+                 HorizontalAlignment="Left" 
+                 Margin="388,40,0,0" 
+                 Text="10.63.96.xxx" 
+                 VerticalAlignment="Top" 
+                 Width="100" 
+                 FontFamily="Consolas" 
+                 Cursor="IBeam" 
+                 FontWeight="SemiBold" 
+                 UndoLimit="15" 
+                 IsReadOnly="True"/>-->
+        <TextBlock x:Name="textBlock" 
+                   HorizontalAlignment="Left" 
+                   Margin="388,40,0,0" 
+                   Text="10.63.96.1xx"
+                   VerticalAlignment="Top" 
+                   Width="100" 
+                   FontFamily="Consolas" 
+                   Cursor="IBeam" 
+                   Background="White" 
+                   FontWeight="SemiBold" 
+                   Initialized="textBlock_Initialized"/>
+        <TextBlock x:Name="textBlock1" 
+                   HorizontalAlignment="Left" 
+                   Margin="388,70,0,0" 
+                   Text="255.255.255.0" 
+                   VerticalAlignment="Top" 
+                   Width="100" 
+                   FontFamily="Consolas" 
+                   Cursor="IBeam" 
+                   Background="White" 
+                   FontWeight="SemiBold"/>
+        <TextBlock x:Name="textBlock2" 
+                   HorizontalAlignment="Left" 
+                   Margin="388,100,0,0" 
+                   Text="10.63.96.1" 
+                   VerticalAlignment="Top" 
+                   Width="100" 
+                   FontFamily="Consolas" 
+                   Cursor="IBeam" 
+                   Background="White" 
+                   FontWeight="SemiBold"/>
+        <Label x:Name="label" 
+               Content="IP Address:" 
+               HorizontalAlignment="Left" 
+               Margin="280,33,0,0" 
+               VerticalAlignment="Top" 
+               Width="103" 
+               Cursor="None" 
+               HorizontalContentAlignment="Right"/>
+        <Label x:Name="label1" 
+               Content="Subnet mask:" 
+               HorizontalAlignment="Left" 
+               Margin="280,63,0,0" 
+               VerticalAlignment="Top" 
+               Width="103" 
+               Cursor="None" 
+               HorizontalContentAlignment="Right"/>
+        <Label x:Name="label2" 
+               Content="Gateway address:" 
+               HorizontalAlignment="Left" 
+               Margin="280,93,0,0" 
+               VerticalAlignment="Top" 
+               Width="103" 
+               Cursor="None" 
+               HorizontalContentAlignment="Right"/>
+        <Button x:Name="button" 
+                Content="Copy to clipboard" 
+                HorizontalAlignment="Left" 
+                Margin="380,130,0,0" 
+                VerticalAlignment="Top" 
+                Width="108" 
+                Click="button_Click" 
+                IsEnabled="False"/>
+        <Button x:Name="button1" 
+                Content="Button1" 
+                HorizontalAlignment="Left" 
+                Margin="27,4,0,0" 
+                VerticalAlignment="Top" 
+                Width="75" 
+                Grid.Column="0" 
+                Grid.Row="0" Click="button1_Click"/>
+        <Button x:Name="rotatedButton" 
+                Content="2nd button" 
+                Width="75" 
+                Height="22" 
+                FontWeight="Bold" 
+                RenderTransformOrigin="0.5,0.5" 
+                KeyDown="rotatedButton_KeyDown" 
+                PreviewKeyDown="rotatedButton_PreviewKeyDown" 
+                Grid.Column="1" 
+                Grid.Row="1">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-23.896"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
     </Grid>
 </Window>
