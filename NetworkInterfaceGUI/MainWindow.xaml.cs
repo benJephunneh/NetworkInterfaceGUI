@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +25,73 @@ namespace NetworkInterfaceGUI
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(Page_Loaded);
 
-            //textBlock.Text = 
-            //textBlock1.Text = 
-            //textBlock2.Text = 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var oldSettings = new IPStuff();
+            {
+                var current = new Process();
+                current.StartInfo.FileName = "netsh";
+                current.StartInfo.Arguments = "interface ip show address \"Ethernet\"";
+                //current.StartInfo.Arguments = "interface ip show address \"Local Area Connection\"";
+                current.StartInfo.UseShellExecute = false;
+                current.StartInfo.RedirectStandardOutput = true;
+                current.Start();
+
+                //Wait for the process to finish, then put output stream into a string.
+                current.WaitForExit();
+
+                var netshOutput = current.StandardOutput.ReadToEnd().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                //Dim oldSettings As New AddressChange
+                //GetCurrentSettings()
+
+                foreach (string line in netshOutput)
+                {
+                    if (line.Contains("IP Address"))
+                    {
+                        ExtractAddress(line, IPStuff.oldIP);
+                    }
+                    else if (line.Contains("mask"))
+                    {
+                        var index = line.IndexOf("mask") + 4;
+                        for (int i = index; i < line.Count() - 1; i++)
+                        {
+                            if (!line[i].Equals(")"))
+                                IPStuff.oldSubnet.Append(line[i]);
+                        }
+                    }
+                    else if (line.Contains("Default Gateway"))
+                    {
+                        ExtractAddress(line, IPStuff.oldGateway);
+                    }
+                }
+                //if line.Contains("IP Address")
+            }
+            //this.Page_Loaded.DataContext
+        }
+
+        private void ExtractAddress(string line, StringBuilder address)
+        {
+            int number;
+            var index = line.IndexOf(".") - 4;
+            if (!int.TryParse(line[index].ToString(), out number))
+                index++;
+
+            for (int i = index; i < line.Count() - 1; i++)
+            {
+                address.Append(line[i]);
+            }
+        }
+
+        private class IPStuff
+        {
+            public static StringBuilder oldIP { get; set; }
+            public static StringBuilder oldSubnet { get; set; }
+            public static StringBuilder oldGateway { get; set; }
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="Change network settings" 
         Height="350" 
-        Width="525"
-        KeyDown="Window_KeyDown"
-        PreviewKeyDown="Window_PreviewKeyDown">
-    <Grid KeyDown="Grid_KeyDown" 
-          PreviewKeyDown="Grid_PreviewKeyDown">
+        Width="525">
+        <!--KeyDown="Window_KeyDown"
+        PreviewKeyDown="Window_PreviewKeyDown">-->
+    <Grid>
+        <!--KeyDown="Grid_KeyDown" 
+          PreviewKeyDown="Grid_PreviewKeyDown"-->
         <GroupBox x:Name="groupBox" 
                   Header="Current settings" 
                   HorizontalAlignment="Left" 
@@ -20,21 +21,10 @@
                   VerticalAlignment="Top" 
                   Width="216" 
                   Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-        <!--<TextBox x:Name="textBox" 
-                 HorizontalAlignment="Left" 
-                 Margin="388,40,0,0" 
-                 Text="10.63.96.xxx" 
-                 VerticalAlignment="Top" 
-                 Width="100" 
-                 FontFamily="Consolas" 
-                 Cursor="IBeam" 
-                 FontWeight="SemiBold" 
-                 UndoLimit="15" 
-                 IsReadOnly="True"/>-->
         <TextBlock x:Name="textBlock" 
                    HorizontalAlignment="Left" 
                    Margin="388,40,0,0" 
-                   Text="10.63.96.1xx"
+                   Text="{Binding oldIP}"
                    VerticalAlignment="Top" 
                    Width="100" 
                    FontFamily="Consolas" 
@@ -45,7 +35,7 @@
         <TextBlock x:Name="textBlock1" 
                    HorizontalAlignment="Left" 
                    Margin="388,70,0,0" 
-                   Text="255.255.255.0" 
+                   Text="{Binding oldSubnet}"
                    VerticalAlignment="Top" 
                    Width="100" 
                    FontFamily="Consolas" 
@@ -55,7 +45,7 @@
         <TextBlock x:Name="textBlock2" 
                    HorizontalAlignment="Left" 
                    Margin="388,100,0,0" 
-                   Text="10.63.96.1" 
+                   Text="{Binding oldGateway}"
                    VerticalAlignment="Top" 
                    Width="100" 
                    FontFamily="Consolas" 
@@ -94,7 +84,7 @@
                 Width="108" 
                 Click="button_Click" 
                 IsEnabled="False"/>
-        <Button x:Name="button1" 
+        <!--<Button x:Name="button1" 
                 Content="Button1" 
                 HorizontalAlignment="Left" 
                 Margin="27,4,0,0" 
@@ -120,6 +110,6 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Button.RenderTransform>
-        </Button>
+        </Button>-->
     </Grid>
 </Window>
